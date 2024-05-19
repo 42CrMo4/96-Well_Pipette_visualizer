@@ -8023,7 +8023,7 @@
   (gr_rect (start 147.348 137.828) (end 160.348 147.828) (layer "F.SilkS") (width 0.12) (fill none) (tstamp cc8ad34b-b9db-4de9-be6a-afeb4d32aecc))
   (gr_rect (start 126.374 52.338) (end 248.988 150.114) (layer "Edge.Cuts") (width 0.05) (fill none) (tstamp d205a3ef-6fc7-4793-884a-a92f50059f45))
   (gr_text "<<project_name>>\n<<ID>>\n<<version>>\n<<date>>\n<<hash>>\n<<website_link>>" (at 187.8 89.2) (layer "B.SilkS") (tstamp db2ece89-8ae6-4182-9241-50ae4c827b71)
-    (effects (font (size 1 1) (thickness 0.15)))
+    (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
   )
   (gr_text "+ ->" (at 167.9 142.9 270) (layer "F.SilkS") (tstamp 347ce90a-4d37-40f4-8fcf-545a3009ebc4)
     (effects (font (size 2 2) (thickness 0.25)))
