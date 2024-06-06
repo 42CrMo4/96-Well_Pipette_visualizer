@@ -21,6 +21,9 @@
 // Pin where the LED strip is connected
 #define LED_PIN 6
 
+// Pin where the button is connected
+#define BUTTON_PIN 4
+
 // Number of LEDs in the strip
 #define NUM_LEDS 96
 
@@ -79,20 +82,31 @@ void setup() {
   // Initialize the LED strip
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+
+  // Initialize the button pin as input with an internal pull-up resistor
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 }
 
 void loop() {
   static int startIndex = 0;
+  static bool buttonPressed = false;
 
-  // Light up the matrix starting from the current startIndex
-  lightUpMatrix(startIndex);
+  // Check if the button is pressed
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    // Debounce the button press
+    if (!buttonPressed) {
+      buttonPressed = true;
 
-  // Advance the startIndex to the next position
-  startIndex += numLEDsLit;
-  if (startIndex >= NUM_LEDS) {
-    startIndex = 0; // Reset to the beginning
+      // Light up the matrix starting from the current startIndex
+      lightUpMatrix(startIndex);
+
+      // Advance the startIndex to the next position
+      startIndex += numLEDsLit;
+      if (startIndex >= NUM_LEDS) {
+        startIndex = 0; // Reset to the beginning
+      }
+    }
+  } else {
+    buttonPressed = false;
   }
-
-  // Wait for 5 seconds before advancing to the next set of LEDs
-  delay(2000);
 }
