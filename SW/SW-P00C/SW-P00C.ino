@@ -16,12 +16,12 @@
 // Number of LEDs to light up at a time
 int numLEDsLit = 3;
 
-static int startIndex = 0;
-
 // Brightness levels
 const int brightnessLevels[] = {10, 30, 50, 80, 100};
 const int numBrightnessLevels = sizeof(brightnessLevels) / sizeof(brightnessLevels[0]);
 int currentBrightnessIndex = 0;
+
+static int startIndex = 0;
 
 // Create an instance of the Adafruit_NeoPixel class
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -46,15 +46,15 @@ void lightUpMatrix(int startIndex) {
     for (int j = 0; j < cols; j++) {
       int currentIndex = i * cols + j;
       if (currentIndex >= startIndex && count < numLEDsLit) {
-        setLED(i, j, strip.Color(0, 0, 20)); // Set each LED to red color
+        setLED(i, j, strip.Color(0, 0, 20)); // Set each LED to blue color
         count++;
       }
     }
   }
-  setBrightness();
   strip.show();
 }
 
+// Function to set brightness
 void setBrightness() {
   uint8_t brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
   strip.setBrightness(brightness);
@@ -70,11 +70,14 @@ void setup() {
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   pinMode(BRIGHTNESS_BUTTON_PIN, INPUT_PULLUP);
 
-  
-  lightUpMatrix(startIndex);
-
   // Initialize serial communication for UART simulation
   Serial.begin(9600);
+
+  // Set initial brightness
+  setBrightness();
+
+  // Initial light up matrix
+  lightUpMatrix(startIndex);
 }
 
 void loop() {
