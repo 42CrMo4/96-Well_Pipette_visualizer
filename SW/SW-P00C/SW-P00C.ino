@@ -1,20 +1,4 @@
-/*
- * LED Matrix Lighting Program
- * HW Version: v1.0
- *
- * This program controls a strip of 96 NeoPixel LEDs arranged in an 8x12 matrix.
- *
- * The program utilizes the Adafruit_NeoPixel library to manage the LED strip.
- * 
- * Hardware Setup:
- * - The LED strip is connected to pin 6 of the microcontroller.
- * - The matrix is defined as an 8x12 grid, mapping the LED indices to their positions.
- *
- * Dependencies:
- * - Adafruit_NeoPixel library
- *
- * Created by 42CrMo4, 2024
- */
+// HW Version v1.0 
 
 #include <Adafruit_NeoPixel.h>
 #include "matrix.h"
@@ -49,24 +33,24 @@ void setLED(int row, int col, uint32_t color) {
 }
 
 // Function to light up LEDs based on the numLEDsLit variable and start position
-void lightUpMatrix(int startIndex) {
+void lightUpMatrix(int startIndex, int brightness) {
   // Turn off all LEDs initially
   strip.clear();
   
   int count = 0;
-  uint8_t brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
+  
 
   // Calculate the starting row and column based on startIndex
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       int currentIndex = i * cols + j;
       if (currentIndex >= startIndex && count < numLEDsLit) {
-        strip.setBrightness(brightness);
-        setLED(i, j, strip.Color(20, 0, 0)); // Set each LED to red color
+        setLED(i, j, strip.Color(brightness, 0, 0)); // Set each LED to red color
         count++;
       }
     }
   }
+  strip.setBrightness(brightness);
   strip.show();
 }
 
@@ -95,7 +79,8 @@ void loop() {
       buttonPressed = true;
 
       // Light up the matrix starting from the current startIndex
-      lightUpMatrix(startIndex);
+      int brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
+      lightUpMatrix(startIndex, brightness);
 
       // Advance the startIndex to the next position
       startIndex += numLEDsLit;
@@ -115,6 +100,9 @@ void loop() {
 
       // Advance to the next brightness level
       currentBrightnessIndex = (currentBrightnessIndex + 1) % numBrightnessLevels;
+
+      int brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
+      lightUpMatrix(startIndex, brightness);
     }
   } else {
     brightnessButtonPressed = false;
