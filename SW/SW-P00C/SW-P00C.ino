@@ -16,6 +16,8 @@
 // Number of LEDs to light up at a time
 int numLEDsLit = 3;
 
+static int startIndex = 0;
+
 // Brightness levels
 const int brightnessLevels[] = {10, 30, 50, 80, 100};
 const int numBrightnessLevels = sizeof(brightnessLevels) / sizeof(brightnessLevels[0]);
@@ -33,25 +35,30 @@ void setLED(int row, int col, uint32_t color) {
 }
 
 // Function to light up LEDs based on the numLEDsLit variable and start position
-void lightUpMatrix(int startIndex, int brightness) {
+void lightUpMatrix(int startIndex) {
   // Turn off all LEDs initially
   strip.clear();
   
   int count = 0;
-  
 
   // Calculate the starting row and column based on startIndex
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       int currentIndex = i * cols + j;
       if (currentIndex >= startIndex && count < numLEDsLit) {
-        setLED(i, j, strip.Color(brightness, 0, 0)); // Set each LED to red color
+        setLED(i, j, strip.Color(0, 0, 20)); // Set each LED to red color
         count++;
       }
     }
   }
-  strip.setBrightness(brightness);
+  setBrightness();
   strip.show();
+}
+
+void setBrightness() {
+  uint8_t brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
+  strip.setBrightness(brightness);
+  strip.show(); // Update the strip with the new brightness
 }
 
 void setup() {
@@ -63,12 +70,14 @@ void setup() {
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   pinMode(BRIGHTNESS_BUTTON_PIN, INPUT_PULLUP);
 
+  
+  lightUpMatrix(startIndex);
+
   // Initialize serial communication for UART simulation
   Serial.begin(9600);
 }
 
 void loop() {
-  static int startIndex = 0;
   static bool buttonPressed = false;
   static bool brightnessButtonPressed = false;
 
@@ -79,8 +88,7 @@ void loop() {
       buttonPressed = true;
 
       // Light up the matrix starting from the current startIndex
-      int brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
-      lightUpMatrix(startIndex, brightness);
+      lightUpMatrix(startIndex);
 
       // Advance the startIndex to the next position
       startIndex += numLEDsLit;
@@ -100,9 +108,9 @@ void loop() {
 
       // Advance to the next brightness level
       currentBrightnessIndex = (currentBrightnessIndex + 1) % numBrightnessLevels;
-
-      int brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
-      lightUpMatrix(startIndex, brightness);
+      
+      // Set the new brightness immediately
+      setBrightness();
     }
   } else {
     brightnessButtonPressed = false;
