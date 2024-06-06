@@ -17,6 +17,7 @@
  */
 
 #include <Adafruit_NeoPixel.h>
+#include "matrix.h"
 
 // Pin where the LED strip is connected
 #define LED_PIN 6
@@ -32,23 +33,6 @@ int numLEDsLit = 3;
 
 // Create an instance of the Adafruit_NeoPixel class
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
-
-// Define the dimensions of the matrix
-const int rows = 8;
-const int cols = 12;
-
-// Initialize the 3x4 matrix with positions corresponding to the LED strip
-int matrix[rows][cols] = 
-{
-  {84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95},
-  {83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72},
-  {60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71},
-  {59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48},
-  {36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47},
-  {35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24},
-  {12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23},
-  {11, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0}
-};
 
 // Function to set a specific LED in the strip
 void setLED(int row, int col, uint32_t color) {
