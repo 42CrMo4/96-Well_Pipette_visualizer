@@ -22,14 +22,20 @@
 // Pin where the LED strip is connected
 #define LED_PIN 6
 
-// Pin where the button is connected
+// Pins where the buttons are connected
 #define BUTTON_PIN 4
+#define BRIGHTNESS_BUTTON_PIN 5
 
 // Number of LEDs in the strip
 #define NUM_LEDS 96
 
 // Number of LEDs to light up at a time
 int numLEDsLit = 3;
+
+// Brightness levels
+const int brightnessLevels[] = {10, 30, 50, 80, 100};
+const int numBrightnessLevels = sizeof(brightnessLevels) / sizeof(brightnessLevels[0]);
+int currentBrightnessIndex = 0;
 
 // Create an instance of the Adafruit_NeoPixel class
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -48,12 +54,14 @@ void lightUpMatrix(int startIndex) {
   strip.clear();
   
   int count = 0;
-  
+  uint8_t brightness = map(brightnessLevels[currentBrightnessIndex], 0, 100, 0, 255);
+
   // Calculate the starting row and column based on startIndex
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       int currentIndex = i * cols + j;
       if (currentIndex >= startIndex && count < numLEDsLit) {
+        strip.setBrightness(brightness);
         setLED(i, j, strip.Color(20, 0, 0)); // Set each LED to red color
         count++;
       }
@@ -67,8 +75,9 @@ void setup() {
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
 
-  // Initialize the button pin as input with an internal pull-up resistor
+  // Initialize the button pins as input with internal pull-up resistors
   pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(BRIGHTNESS_BUTTON_PIN, INPUT_PULLUP);
 
   // Initialize serial communication for UART simulation
   Serial.begin(9600);
@@ -77,8 +86,9 @@ void setup() {
 void loop() {
   static int startIndex = 0;
   static bool buttonPressed = false;
+  static bool brightnessButtonPressed = false;
 
-  // Check if the button is pressed
+  // Check if the main button is pressed
   if (digitalRead(BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'p')) {
     // Debounce the button press
     if (!buttonPressed) {
@@ -95,5 +105,18 @@ void loop() {
     }
   } else {
     buttonPressed = false;
+  }
+
+  // Check if the brightness button is pressed
+  if (digitalRead(BRIGHTNESS_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'b')) {
+    // Debounce the brightness button press
+    if (!brightnessButtonPressed) {
+      brightnessButtonPressed = true;
+
+      // Advance to the next brightness level
+      currentBrightnessIndex = (currentBrightnessIndex + 1) % numBrightnessLevels;
+    }
+  } else {
+    brightnessButtonPressed = false;
   }
 }
