@@ -10,6 +10,8 @@
 #define BUTTON_PIN 4
 #define BRIGHTNESS_BUTTON_PIN 5
 #define NUM_LEDS_LIT_BUTTON_PIN 7
+#define COLOR_BUTTON_PIN 8
+#define CLEAR_BUTTON_PIN 9
 
 // Number of LEDs in the strip
 #define NUM_LEDS 96
@@ -31,6 +33,15 @@ int currentBrightnessIndex = 0;
 // Create an instance of the Adafruit_NeoPixel class
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
+// Colors
+const uint32_t colors[] = {
+  strip.Color(20, 0, 0), // Red
+  strip.Color(0, 20, 0), // Green
+  strip.Color(0, 0, 20)  // Blue
+};
+const int numColors = sizeof(colors) / sizeof(colors[0]);
+int currentColorIndex = 0;
+
 // Function to set a specific LED in the strip
 void setLED(int row, int col, uint32_t color) {
   if (row >= 0 && row < rows && col >= 0 && col < cols) {
@@ -51,7 +62,7 @@ void lightUpMatrix(int startIndex) {
     for (int j = 0; j < cols; j++) {
       int currentIndex = i * cols + j;
       if (currentIndex >= startIndex && count < numLEDsLit) {
-        setLED(i, j, strip.Color(0, 0, 20)); // Set each LED to blue color
+        setLED(i, j, colors[currentColorIndex]); // Set each LED to the current color
         count++;
       }
     }
@@ -75,6 +86,8 @@ void setup() {
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   pinMode(BRIGHTNESS_BUTTON_PIN, INPUT_PULLUP);
   pinMode(NUM_LEDS_LIT_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(COLOR_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(CLEAR_BUTTON_PIN, INPUT_PULLUP);
 
   // Initialize serial communication for UART simulation
   Serial.begin(9600);
@@ -90,6 +103,8 @@ void loop() {
   static bool buttonPressed = false;
   static bool brightnessButtonPressed = false;
   static bool numLEDsLitButtonPressed = false;
+  static bool colorButtonPressed = false;
+  static bool clearButtonPressed = false;
 
   // Check if the main button is pressed
   if (digitalRead(BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'p')) {
@@ -141,5 +156,36 @@ void loop() {
     }
   } else {
     numLEDsLitButtonPressed = false;
+  }
+
+  // Check if the color button is pressed
+  if (digitalRead(COLOR_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'c')) {
+    // Debounce the color button press
+    if (!colorButtonPressed) {
+      colorButtonPressed = true;
+
+      // Advance to the next color
+      currentColorIndex = (currentColorIndex + 1) % numColors;
+
+      // Update the matrix immediately
+      lightUpMatrix(startIndex);
+    }
+  } else {
+    colorButtonPressed = false;
+  }
+
+  // Check if the clear button is pressed
+  if (digitalRead(CLEAR_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'x')) {
+    // Debounce the clear button press
+    if (!clearButtonPressed) {
+      clearButtonPressed = true;
+
+      // Clear the matrix and reset startIndex
+      startIndex = 0;
+      strip.clear();
+      strip.show();
+    }
+  } else {
+    clearButtonPressed = false;
   }
 }
