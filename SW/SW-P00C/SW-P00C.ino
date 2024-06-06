@@ -85,6 +85,9 @@ void setup() {
 
   // Initialize the button pin as input with an internal pull-up resistor
   pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+  // Initialize serial communication for UART simulation
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -92,7 +95,7 @@ void loop() {
   static bool buttonPressed = false;
 
   // Check if the button is pressed
-  if (digitalRead(BUTTON_PIN) == LOW) {
+  if (digitalRead(BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'p')) {
     // Debounce the button press
     if (!buttonPressed) {
       buttonPressed = true;
