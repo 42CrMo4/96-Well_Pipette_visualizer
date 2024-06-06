@@ -135,6 +135,9 @@ void loop() {
       // Advance to the next numLEDsLit option
       currentNumLEDsLitIndex = (currentNumLEDsLitIndex + 1) % numNumLEDsLitOptions;
       numLEDsLit = numLEDsLitOptions[currentNumLEDsLitIndex];
+
+      // Update the matrix immediately
+      lightUpMatrix(startIndex);
     }
   } else {
     numLEDsLitButtonPressed = false;
