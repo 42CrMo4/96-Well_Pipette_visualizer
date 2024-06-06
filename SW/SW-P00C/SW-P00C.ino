@@ -1,4 +1,20 @@
-// HW Version v1.0 
+/*
+ * LED Matrix Lighting Program
+ * HW Version: v1.0
+ *
+ * This program controls a strip of 96 NeoPixel LEDs arranged in an 8x12 matrix.
+ *
+ * The program utilizes the Adafruit_NeoPixel library to manage the LED strip.
+ * 
+ * Hardware Setup:
+ * - The LED strip is connected to pin 6 of the microcontroller.
+ * - The matrix is defined as an 8x12 grid, mapping the LED indices to their positions.
+ *
+ * Dependencies:
+ * - Adafruit_NeoPixel library
+ *
+ * Created by 42CrMo4, 2024
+ */
 
 #include <Adafruit_NeoPixel.h>
 
