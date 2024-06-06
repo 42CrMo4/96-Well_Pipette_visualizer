@@ -1,3 +1,5 @@
+// HW Version v1.0 
+
 #include <Adafruit_NeoPixel.h>
 
 // Pin where the LED strip is connected
