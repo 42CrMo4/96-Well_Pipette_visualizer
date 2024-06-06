@@ -9,19 +9,24 @@
 // Pins where the buttons are connected
 #define BUTTON_PIN 4
 #define BRIGHTNESS_BUTTON_PIN 5
+#define NUM_LEDS_LIT_BUTTON_PIN 7
 
 // Number of LEDs in the strip
 #define NUM_LEDS 96
 
-// Number of LEDs to light up at a time
-int numLEDsLit = 3;
+// Array of possible numbers of LEDs to light up at a time
+const int numLEDsLitOptions[] = {1, 2, 3, 4};
+const int numNumLEDsLitOptions = sizeof(numLEDsLitOptions) / sizeof(numLEDsLitOptions[0]);
+int currentNumLEDsLitIndex = 0;
+
+int numLEDsLit = numLEDsLitOptions[currentNumLEDsLitIndex];
+
+static int startIndex = 0;
 
 // Brightness levels
 const int brightnessLevels[] = {10, 30, 50, 80, 100};
 const int numBrightnessLevels = sizeof(brightnessLevels) / sizeof(brightnessLevels[0]);
 int currentBrightnessIndex = 0;
-
-static int startIndex = 0;
 
 // Create an instance of the Adafruit_NeoPixel class
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -69,6 +74,7 @@ void setup() {
   // Initialize the button pins as input with internal pull-up resistors
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   pinMode(BRIGHTNESS_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(NUM_LEDS_LIT_BUTTON_PIN, INPUT_PULLUP);
 
   // Initialize serial communication for UART simulation
   Serial.begin(9600);
@@ -83,6 +89,7 @@ void setup() {
 void loop() {
   static bool buttonPressed = false;
   static bool brightnessButtonPressed = false;
+  static bool numLEDsLitButtonPressed = false;
 
   // Check if the main button is pressed
   if (digitalRead(BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'p')) {
@@ -117,5 +124,19 @@ void loop() {
     }
   } else {
     brightnessButtonPressed = false;
+  }
+
+  // Check if the numLEDsLit button is pressed
+  if (digitalRead(NUM_LEDS_LIT_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'n')) {
+    // Debounce the numLEDsLit button press
+    if (!numLEDsLitButtonPressed) {
+      numLEDsLitButtonPressed = true;
+
+      // Advance to the next numLEDsLit option
+      currentNumLEDsLitIndex = (currentNumLEDsLitIndex + 1) % numNumLEDsLitOptions;
+      numLEDsLit = numLEDsLitOptions[currentNumLEDsLitIndex];
+    }
+  } else {
+    numLEDsLitButtonPressed = false;
   }
 }
