@@ -193,6 +193,12 @@ void loop() {
       startIndex = 0;
       strip.clear();
       strip.show();
+
+      // Allow changing numLEDsLit after clearing
+      canChangeNumLEDsLit = true;
+
+      // Light up the first LEDs again
+      lightUpMatrix(startIndex);
     }
   } else {
     clearButtonPressed = false;
