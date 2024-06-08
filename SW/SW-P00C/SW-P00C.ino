@@ -17,7 +17,7 @@
 #define NUM_LEDS 96
 
 // Array of possible numbers of LEDs to light up at a time
-const int numLEDsLitOptions[] = {1, 2, 3, 4};
+const int numLEDsLitOptions[] = {1, 2, 3, 4, 6};
 const int numNumLEDsLitOptions = sizeof(numLEDsLitOptions) / sizeof(numLEDsLitOptions[0]);
 int currentNumLEDsLitIndex = 0;
 
