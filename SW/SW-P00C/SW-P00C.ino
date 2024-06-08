@@ -177,7 +177,7 @@ void loop() {
       currentColorIndex = (currentColorIndex + 1) % numColors;
 
       // Set the new color immediately
-      lightUpMatrix(startIndex-1);
+      lightUpMatrix(startIndex - numLEDsLit);
     }
   } else {
     colorButtonPressed = false;
