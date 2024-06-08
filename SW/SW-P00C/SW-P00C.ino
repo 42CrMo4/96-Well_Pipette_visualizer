@@ -4,14 +4,15 @@
 #include "matrix.h"
 
 // Pin where the LED strip is connected
-#define LED_PIN 6
+#define LED_PIN 3
 
 // Pins where the buttons are connected
 #define BUTTON_PIN 4
-#define BRIGHTNESS_BUTTON_PIN 5
-#define NUM_LEDS_LIT_BUTTON_PIN 7
-#define COLOR_BUTTON_PIN 8
-#define CLEAR_BUTTON_PIN 9
+#define BUTTON2_PIN 9
+#define BRIGHTNESS_BUTTON_PIN 6
+#define NUM_LEDS_LIT_BUTTON_PIN 8
+#define COLOR_BUTTON_PIN 5
+#define CLEAR_BUTTON_PIN 7
 
 // Number of LEDs in the strip
 #define NUM_LEDS 96
@@ -111,7 +112,7 @@ void loop() {
   static bool canChangeNumLEDsLit = true; // Flag to allow changing numLEDsLit only at start and after clear
 
   // Check if the main button is pressed
-  if (digitalRead(BUTTON_PIN) == LOW) {
+  if (digitalRead(BUTTON_PIN) == LOW || digitalRead(BUTTON2_PIN) == LOW) {
     // Debounce the button press
     if (!buttonPressed) {
       buttonPressed = true;
