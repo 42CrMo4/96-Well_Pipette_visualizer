@@ -89,9 +89,6 @@ void setup() {
   pinMode(COLOR_BUTTON_PIN, INPUT_PULLUP);
   pinMode(CLEAR_BUTTON_PIN, INPUT_PULLUP);
 
-  // Initialize serial communication for UART simulation
-  Serial.begin(9600);
-
   // Set initial brightness
   setBrightness();
 
@@ -107,7 +104,7 @@ void loop() {
   static bool clearButtonPressed = false;
 
   // Check if the main button is pressed
-  if (digitalRead(BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'p')) {
+  if (digitalRead(BUTTON_PIN) == LOW) {
     // Debounce the button press
     if (!buttonPressed) {
       buttonPressed = true;
@@ -126,7 +123,7 @@ void loop() {
   }
 
   // Check if the brightness button is pressed
-  if (digitalRead(BRIGHTNESS_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'b')) {
+  if (digitalRead(BRIGHTNESS_BUTTON_PIN) == LOW) {
     // Debounce the brightness button press
     if (!brightnessButtonPressed) {
       brightnessButtonPressed = true;
@@ -142,7 +139,7 @@ void loop() {
   }
 
   // Check if the numLEDsLit button is pressed
-  if (digitalRead(NUM_LEDS_LIT_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'n')) {
+  if (digitalRead(NUM_LEDS_LIT_BUTTON_PIN) == LOW) {
     // Debounce the numLEDsLit button press
     if (!numLEDsLitButtonPressed) {
       numLEDsLitButtonPressed = true;
@@ -159,7 +156,7 @@ void loop() {
   }
 
   // Check if the color button is pressed
-  if (digitalRead(COLOR_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'c')) {
+  if (digitalRead(COLOR_BUTTON_PIN) == LOW) {
     // Debounce the color button press
     if (!colorButtonPressed) {
       colorButtonPressed = true;
@@ -175,7 +172,7 @@ void loop() {
   }
 
   // Check if the clear button is pressed
-  if (digitalRead(CLEAR_BUTTON_PIN) == LOW || (Serial.available() && Serial.read() == 'x')) {
+  if (digitalRead(CLEAR_BUTTON_PIN) == LOW) {
     // Debounce the clear button press
     if (!clearButtonPressed) {
       clearButtonPressed = true;
