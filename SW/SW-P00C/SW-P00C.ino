@@ -164,8 +164,8 @@ void loop() {
       // Advance to the next color
       currentColorIndex = (currentColorIndex + 1) % numColors;
 
-      // Update the matrix immediately
-      lightUpMatrix(startIndex);
+      // Set the new color immediately
+      lightUpMatrix(startIndex-1);
     }
   } else {
     colorButtonPressed = false;
