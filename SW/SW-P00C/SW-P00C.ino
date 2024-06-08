@@ -77,6 +77,11 @@ void setBrightness() {
   strip.show(); // Update the strip with the new brightness
 }
 
+// Function to set the number of LEDs lit
+void setNumLEDsLit() {
+  numLEDsLit = numLEDsLitOptions[currentNumLEDsLitIndex];
+}
+
 void setup() {
   // Initialize the LED strip
   strip.begin();
@@ -103,6 +108,8 @@ void loop() {
   static bool colorButtonPressed = false;
   static bool clearButtonPressed = false;
 
+  static bool canChangeNumLEDsLit = true; // Flag to allow changing numLEDsLit only at start and after clear
+
   // Check if the main button is pressed
   if (digitalRead(BUTTON_PIN) == LOW) {
     // Debounce the button press
@@ -117,6 +124,9 @@ void loop() {
       if (startIndex >= NUM_LEDS) {
         startIndex = 0; // Reset to the beginning
       }
+
+      // Disallow changing numLEDsLit after the first press
+      canChangeNumLEDsLit = false;
     }
   } else {
     buttonPressed = false;
@@ -139,14 +149,16 @@ void loop() {
   }
 
   // Check if the numLEDsLit button is pressed
-  if (digitalRead(NUM_LEDS_LIT_BUTTON_PIN) == LOW) {
+  if (digitalRead(NUM_LEDS_LIT_BUTTON_PIN) == LOW && canChangeNumLEDsLit) {
     // Debounce the numLEDsLit button press
     if (!numLEDsLitButtonPressed) {
       numLEDsLitButtonPressed = true;
 
       // Advance to the next numLEDsLit option
       currentNumLEDsLitIndex = (currentNumLEDsLitIndex + 1) % numNumLEDsLitOptions;
-      numLEDsLit = numLEDsLitOptions[currentNumLEDsLitIndex];
+
+      // Set the new numLEDsLit value immediately
+      setNumLEDsLit();
 
       // Update the matrix immediately
       lightUpMatrix(startIndex);
