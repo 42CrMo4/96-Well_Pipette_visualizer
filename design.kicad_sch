@@ -11810,60 +11810,7 @@
         )
       )
     )
-    (symbol "power:VCC" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
-      (property "Reference" "#PWR" (id 0) (at 0 -3.81 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Value" "VCC" (id 1) (at 0 3.81 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Footprint" "" (id 2) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Datasheet" "" (id 3) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_keywords" "power-flag" (id 4) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_description" "Power symbol creates a global label with name \"VCC\"" (id 5) (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "VCC_0_1"
-        (polyline
-          (pts
-            (xy -0.762 1.27)
-            (xy 0 2.54)
-          )
-          (stroke (width 0) (type default) (color 0 0 0 0))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 0 0)
-            (xy 0 2.54)
-          )
-          (stroke (width 0) (type default) (color 0 0 0 0))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 0 2.54)
-            (xy 0.762 1.27)
-          )
-          (stroke (width 0) (type default) (color 0 0 0 0))
-          (fill (type none))
-        )
-      )
-      (symbol "VCC_1_1"
-        (pin power_in line (at 0 0 90) (length 0) hide
-          (name "VCC" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
   )
-
 
   (junction (at 190.5 359.41) (diameter 0) (color 0 0 0 0)
     (uuid 104eff6b-e773-4d82-8f9a-b509c2be4748)
@@ -14093,7 +14040,7 @@
     (pin "1" (uuid f78686bc-319a-4362-9485-f47bbc575072))
   )
 
-  (symbol (lib_id "power:VCC") (at 195.58 231.14 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 195.58 231.14 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 182266e5-9d3d-4d5a-8bb5-2707cb04546b)
     (property "Reference" "#PWR033" (id 0) (at 195.58 234.95 0)
@@ -14363,7 +14310,7 @@
     (pin "1" (uuid bf1ee4d8-54a4-43a6-b232-4b7cf688521a))
   )
 
-  (symbol (lib_id "power:VCC") (at 103.505 231.775 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 103.505 231.775 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 22331f75-02f4-47eb-b7b9-261ce6992577)
     (property "Reference" "#PWR09" (id 0) (at 103.505 235.585 0)
@@ -14395,7 +14342,7 @@
     (pin "1" (uuid 5fda0112-16f9-4bee-a53a-2e61b347823f))
   )
 
-  (symbol (lib_id "power:VCC") (at 103.505 352.425 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 103.505 352.425 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 22862538-aaf8-4d41-b849-705d545e4fda)
     (property "Reference" "#PWR012" (id 0) (at 103.505 356.235 0)
@@ -14863,7 +14810,7 @@
     (pin "4" (uuid 628c9bec-8f65-4c7e-8cbf-af41652c7154))
   )
 
-  (symbol (lib_id "power:VCC") (at 103.505 271.145 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 103.505 271.145 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 36850115-3f0d-435f-b10e-53b13f7d0ffb)
     (property "Reference" "#PWR010" (id 0) (at 103.505 274.955 0)
@@ -16149,7 +16096,7 @@
     (pin "2" (uuid f9fa83d4-5ac1-4d5f-ae3f-372b980c1423))
   )
 
-  (symbol (lib_id "power:VCC") (at 109.22 352.425 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 109.22 352.425 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 69d85780-c11a-428d-9a23-56df0a17c1bf)
     (property "Reference" "#PWR019" (id 0) (at 109.22 356.235 0)
@@ -16201,7 +16148,7 @@
     (pin "4" (uuid bb95a560-8adf-45e4-b918-0be1eeea728c))
   )
 
-  (symbol (lib_id "power:VCC") (at 109.22 231.775 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 109.22 231.775 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 6bc6af01-0ebe-452a-b148-86a46d74452c)
     (property "Reference" "#PWR017" (id 0) (at 109.22 235.585 0)
@@ -16772,7 +16719,7 @@
     (pin "2" (uuid b543b35d-dc3c-48e3-90c4-d333cc6f1fd0))
   )
 
-  (symbol (lib_id "power:VCC") (at 103.505 313.055 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 103.505 313.055 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 80fa3bf0-1208-4aae-aa65-057e585864b5)
     (property "Reference" "#PWR011" (id 0) (at 103.505 316.865 0)
@@ -16856,7 +16803,7 @@
     (pin "4" (uuid e7e7e43f-69ba-462f-8430-d87bba6b1df8))
   )
 
-  (symbol (lib_id "power:VCC") (at 190.5 351.79 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 190.5 351.79 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 8371782e-f27f-4116-b1c4-2091f4f5d68d)
     (property "Reference" "#PWR032" (id 0) (at 190.5 355.6 0)
@@ -17422,7 +17369,7 @@
     (pin "1" (uuid c425c856-cdac-47ba-b41c-9965b9ec200a))
   )
 
-  (symbol (lib_id "power:VCC") (at 196.215 312.42 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 196.215 312.42 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 9271c625-cb2c-42c7-a472-5bacb89dfe5e)
     (property "Reference" "#PWR037" (id 0) (at 196.215 316.23 0)
@@ -18449,7 +18396,7 @@
     (pin "4" (uuid 133e2263-dcb6-457a-acca-312d6e06340c))
   )
 
-  (symbol (lib_id "power:VCC") (at 196.215 270.51 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 196.215 270.51 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid befd036f-fbab-4135-8e31-5a4755aa41a6)
     (property "Reference" "#PWR035" (id 0) (at 196.215 274.32 0)
@@ -18847,7 +18794,7 @@
     (pin "4" (uuid 9c2ef118-3d13-456d-800c-ca2375ed5ffe))
   )
 
-  (symbol (lib_id "power:VCC") (at 190.5 231.14 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 190.5 231.14 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid ccc05a2d-a2c2-4e01-a584-fafc8710f9d9)
     (property "Reference" "#PWR029" (id 0) (at 190.5 234.95 0)
@@ -19255,7 +19202,7 @@
     (pin "1" (uuid c9cc1777-036c-4f79-9727-7476b6a24053))
   )
 
-  (symbol (lib_id "power:VCC") (at 108.585 313.055 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 108.585 313.055 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid dbdb85c7-c07c-468f-ad3f-3d04b37c003b)
     (property "Reference" "#PWR015" (id 0) (at 108.585 316.865 0)
@@ -19502,7 +19449,7 @@
     (pin "1" (uuid 31d16c83-5eed-4bbf-a1e0-0574eac3f977))
   )
 
-  (symbol (lib_id "power:VCC") (at 196.215 351.79 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 196.215 351.79 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid e7a477f3-6c98-41b5-bd40-0e8a90e87b34)
     (property "Reference" "#PWR039" (id 0) (at 196.215 355.6 0)
@@ -19728,7 +19675,7 @@
     (pin "6" (uuid 01cb722c-efe6-46e9-97bc-aa21d7691ee2))
   )
 
-  (symbol (lib_id "power:VCC") (at 190.5 312.42 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 190.5 312.42 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid ee8a9281-ff7c-466c-b20b-c7b0c92be6aa)
     (property "Reference" "#PWR031" (id 0) (at 190.5 316.23 0)
@@ -19776,7 +19723,7 @@
     (pin "1" (uuid b75926f4-e3d5-4587-b8c7-ee3230fd1c78))
   )
 
-  (symbol (lib_id "power:VCC") (at 108.585 271.145 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 108.585 271.145 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid f18ff641-b8ea-4089-bc49-89029a455890)
     (property "Reference" "#PWR013" (id 0) (at 108.585 274.955 0)
@@ -19995,7 +19942,7 @@
     (pin "1" (uuid 0a165290-2467-49d5-b19d-ec055b4b1428))
   )
 
-  (symbol (lib_id "power:VCC") (at 190.5 270.51 0) (unit 1)
+  (symbol (lib_id "power:+5V") (at 190.5 270.51 0) (unit 1)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid f5e4172a-d92e-4b4d-bbde-25406d649e6d)
     (property "Reference" "#PWR030" (id 0) (at 190.5 274.32 0)
